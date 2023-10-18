@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     public int vidas = 3;
 
+    private GerenciadorDeUI _uiGerenciador;
+
     [SerializeField]
     private GameObject _explosaoPlayerPrefab;
 
@@ -29,6 +31,15 @@ public class Player : MonoBehaviour
         Debug.Log("Start de "+this.name);
         velocidade = 3.0f ;
         transform.position = new Vector3(0,0,0);
+
+        _uiGerenciador = GameObject.Find("Canvas").GetComponent<GerenciadorDeUI>();
+        if (_uiGerenciador != null)
+        {
+            _uiGerenciador.AtualizarVidas(vidas);
+
+        }
+
+
     }
 
     // Update is called once per frame
@@ -111,6 +122,9 @@ public class Player : MonoBehaviour
     {
         // vidas = vidas - 1;
         vidas--;
+
+        _uiGerenciador.AtualizarVidas(vidas);
+
 
         if ( vidas < 1 )
         {
